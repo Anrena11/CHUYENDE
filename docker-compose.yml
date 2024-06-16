@@ -3,7 +3,7 @@ services:
     image: nginx:1.15.12-alpine
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8082:80"
     volumes:
       - /home/ec2-user/CHUYENDE/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
       # Thêm :ro để mount file với quyền read-only
