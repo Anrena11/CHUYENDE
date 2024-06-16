@@ -5,8 +5,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro  # Đảm bảo mount volume chỉ đọc
-      - ./src:/var/www/html:rw
+      - /home/ec2-user/CHUYENDE/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
+      # Thêm :ro để mount file với quyền read-only
+      - /home/ec2-user/CHUYENDE/src:/var/www/html
     networks:
       - wordpress-network
 
