@@ -5,9 +5,9 @@ services:
     ports:
       - "8082:80"
     volumes:
-      - /home/ec2-user/CHUYENDE/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
+      - /CHUYENDE/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
       # Thêm :ro để mount file với quyền read-only
-      - /home/ec2-user/CHUYENDE/src:/var/www/html
+      - /CHUYENDE/src:/var/www/html
     networks:
       - wordpress-network
 
@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
     ports:
       - 3306:3306
-    env_file: /home/ec2-user/.env
+    env_file: /.env
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -37,7 +37,7 @@ services:
       - database
     image: phpmyadmin/phpmyadmin
     restart: unless-stopped
-    env_file: /home/ec2-user/.env
+    env_file: /.env
     environment:
       PMA_HOST: database
       PMA_PORT: 3306  
@@ -50,7 +50,7 @@ services:
       - database
     image: wordpress:latest
     restart: unless-stopped
-    env_file: /home/ec2-user/.env
+    env_file: /.env
     environment:
       WORDPRESS_DB_HOST: database:3306
       WORDPRESS_DB_NAME: ${DB_NAME}
