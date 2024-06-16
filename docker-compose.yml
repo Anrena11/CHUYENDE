@@ -5,7 +5,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro  # Đảm bảo mount volume chỉ đọc
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro  # Đảm bảo mount volume chỉ đọc
       - ./src:/var/www/html:rw
     networks:
       - wordpress-network
