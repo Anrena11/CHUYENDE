@@ -18,10 +18,10 @@ services:
       - 3306:3306
     env_file: /home/ec2-user/.env
     environment:
-      MYSQL_ROOT_PASSWORD: '${DB_ROOT_PASSWORD}'
-      MYSQL_DATABASE: '${DB_NAME}'
-      MYSQL_USER: '${DB_USER}'
-      MYSQL_PASSWORD: '${DB_ROOT_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db-data:/var/lib/mysql
     networks:
@@ -41,7 +41,7 @@ services:
     environment:
       PMA_HOST: database
       PMA_PORT: 3306  
-      MYSQL_ROOT_PASSWORD: '${DB_ROOT_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
       - wordpress-network
 
@@ -53,9 +53,9 @@ services:
     env_file: /home/ec2-user/.env
     environment:
       WORDPRESS_DB_HOST: database:3306
-      WORDPRESS_DB_NAME: '${DB_NAME}'
-      WORDPRESS_DB_USER: '${DB_USER}'
-      WORDPRESS_DB_PASSWORD: '${DB_PASSWORD}'
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./src:/var/www/html:rw
     networks:
