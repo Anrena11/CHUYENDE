@@ -8,15 +8,16 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@main
 
-    steps:
-    - uses: actions/checkout@main
-    - name: Create .env
-      run: |
-        echo 'DB_NAME=${{ secrets.DB_NAME }}' >> .env
-        echo 'DB_USER=${{ secrets.DB_USER }}' >> .env
-        echo 'DB_PASSWORD=${{ secrets.DB_PASSWORD }}' >> .env
-        echo 'DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}' >> .env
-      
+    - name: Login to Docker Hub
+      uses: docker/login-action@main
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
     - name: Build Docker
       run: docker compose up --build -d
