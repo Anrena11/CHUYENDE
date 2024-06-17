@@ -73,6 +73,7 @@ services:
 
 
 volumes:
+  - /var/lib/docker/overlay2/7eff9438ce728ad70958875b37b022c657320d2bf198cc528e2b0ed27dd2d50c/merged/usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu
   db-data: 
 
 networks:
