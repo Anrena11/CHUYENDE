@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
     ports:
       - 3306:3306
-    env_file: /.env
+    env_file: CHUYENDE/.env
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -37,7 +37,7 @@ services:
       - database
     image: phpmyadmin/phpmyadmin
     restart: unless-stopped
-    env_file: /.env
+    env_file: CHUYENDE/.env
     environment:
       PMA_HOST: database
       PMA_PORT: 3306  
@@ -50,7 +50,7 @@ services:
       - database
     image: wordpress:latest
     restart: unless-stopped
-    env_file: /.env
+    env_file: CHUYENDE/.env
     environment:
       WORDPRESS_DB_HOST: database:3306
       WORDPRESS_DB_NAME: ${DB_NAME}
