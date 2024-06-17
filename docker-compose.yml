@@ -10,6 +10,9 @@ services:
       - /CHUYENDE/src:/var/www/html
     networks:
       - wordpress-network
+    environment:
+      LD_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu  # Thêm biến môi trường LD_LIBRARY_PATH vào service nginx
+
 
   database:
     image: mysql:5.7.28
@@ -30,7 +33,9 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$DB_ROOT_PASSWORD"]
       timeout: 30s
       retries: 5  
-   
+    environment:
+      LD_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu  # Thêm biến môi trường LD_LIBRARY_PATH vào service nginx
+
 
   phpadmin:
     depends_on:
@@ -44,6 +49,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
       - wordpress-network
+    environment:
+      LD_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu  # Thêm biến môi trường LD_LIBRARY_PATH vào service nginx
 
   wordpress:
     depends_on:
@@ -60,6 +67,9 @@ services:
       - ./src:/var/www/html:rw
     networks:
       - wordpress-network
+    environment:
+      LD_LIBRARY_PATH: /usr/lib/x86_64-linux-gnu  # Thêm biến môi trường LD_LIBRARY_PATH vào service nginx
+
 
 
 volumes:
