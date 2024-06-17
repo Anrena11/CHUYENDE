@@ -1,7 +1,7 @@
-# Sử dụng Amazon Linux 2 làm base image
-FROM amazonlinux:2
+FROM ubuntu:latest
 
-# Cài đặt các gói cần thiết, bao gồm libcrypt
-RUN yum update -y \
-    && yum install -y libcrypt \
-    && yum clean all
+RUN apt-get update \
+    && apt-get install -y libcrypt1 \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
