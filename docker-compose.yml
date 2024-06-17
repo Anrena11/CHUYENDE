@@ -11,13 +11,12 @@ services:
     networks:
       - wordpress-network
 
-
   database:
     image: mysql:5.7.28
     restart: unless-stopped
     ports:
       - 3306:3306
-    env_file: /home/ec2-user/actions-runner/CHUYENDE/.env
+    env_file: /.env
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -31,14 +30,14 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$DB_ROOT_PASSWORD"]
       timeout: 30s
       retries: 5  
-
+   
 
   phpadmin:
     depends_on:
       - database
     image: phpmyadmin/phpmyadmin
     restart: unless-stopped
-    env_file: /home/ec2-user/actions-runner/CHUYENDE/.env
+    env_file: /.env
     environment:
       PMA_HOST: database
       PMA_PORT: 3306  
@@ -51,7 +50,7 @@ services:
       - database
     image: wordpress:latest
     restart: unless-stopped
-    env_file: /home/ec2-user/actions-runner/CHUYENDE/.env
+    env_file: /.env
     environment:
       WORDPRESS_DB_HOST: database:3306
       WORDPRESS_DB_NAME: ${DB_NAME}
@@ -61,7 +60,6 @@ services:
       - ./src:/var/www/html:rw
     networks:
       - wordpress-network
-
 
 
 volumes:
